@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="스마트 벤치의 세트별 운동 결과를 확인하는 로컬 시연 화면">
+  <title>Smart Bench · 운동 리포트</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="protocol.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./"><span class="mark" aria-hidden="true">Ⅱ</span> SMART BENCH <span class="brand-sub">운동 리포트</span></a>
+    <div class="connection"><span id="connection-state" role="status">보드 연결 안 됨</span><button id="connect">STM2 연결</button></div>
+  </header>
+  <main>
+    <div id="notice" class="notice" role="status">STM2를 USB로 연결한 뒤 ‘STM2 연결’을 눌러 포트를 선택하세요.</div>
+    <section id="waiting" class="waiting">
+      <div class="eyebrow">YOUR WORKOUT, IN VIEW</div>
+      <h1>운동을 마치면,<br>모든 세트를 한눈에.</h1>
+      <p class="lead">운동에 집중하세요. 바를 거치하고 키패드의 <kbd>D</kbd>를 누르면<br class="wide-only"> 이 화면에 세트별 분석 결과가 나타납니다.</p>
+      <div class="steps">
+        <article><span class="step-label">연결</span><h2>STM2와 노트북 연결</h2><p>STM2의 ST-LINK USB 포트를 사용하세요. 웹 화면에서 포트 선택은 한 번 필요합니다.</p></article>
+        <article><span class="step-label">운동</span><h2>뽑으면 시작, 놓으면 종료</h2><p>세트는 기존 방식 그대로 진행합니다. 보정은 전원 연결 후 최초 한 번만 수행합니다.</p></article>
+        <article><span class="step-label">완료</span><h2>거치 후 키패드 D</h2><p>오른쪽 맨 아래 D 키를 누르세요. 마지막 측정까지 받은 후 리포트를 표시합니다.</p></article>
+      </div>
+    </section>
+    <section id="report" hidden aria-labelledby="report-title">
+      <div class="report-heading"><div><div class="eyebrow">WORKOUT COMPLETE</div><h1 id="report-title">오늘의 세트 리포트</h1><p id="report-meta"></p></div><button id="download" class="secondary">결과 저장</button></div>
+      <p id="overflow" class="warning" hidden></p>
+      <div class="metrics">
+        <article><span>기록된 세트</span><strong id="total-sets">—</strong></article>
+        <article><span>측정된 총 반복</span><strong id="total-reps">—</strong></article>
+        <article><span>총 운동량 <small>무게 × 횟수</small></span><strong id="total-volume">—</strong></article>
+        <article><span>보조 개입 세트</span><strong id="assist-sets">—</strong></article>
+      </div>
+      <div class="overview"><div><h2>세트별 반복 횟수</h2><p>측정 오류가 있는 세트는 주황색으로 표시합니다.</p></div><div id="rep-chart" class="rep-chart" aria-label="세트별 반복 횟수"></div></div>
+      <div class="section-heading"><h2>세트별 분석</h2><span>STM2에서 계산한 결과</span></div>
+      <div id="sets" class="sets"></div>
+      <p class="footnote">상승 시간 증가율은 첫 1~2회 평균 대비 마지막 반복의 시간 증가율입니다. 속도 감소율과는 다른 값입니다. 불안정 점수와 다음 세트 추천은 현재 펌웨어의 시연용 알고리즘을 그대로 표시합니다.</p>
+    </section>
+  </main>
+  <footer><span>SMART BENCH / LOCAL DEMO</span><span>최초 보정 1회 · 세트 기록은 STM2에서 처리</span></footer>
+</body>
+</html>
